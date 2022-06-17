@@ -6,6 +6,8 @@ package it.polito.tdp.itunes;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import it.polito.tdp.itunes.model.Genre;
 import it.polito.tdp.itunes.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,7 +39,7 @@ public class FXMLController {
     private ComboBox<?> cmbCanzone; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbGenere"
-    private ComboBox<?> cmbGenere; // Value injected by FXMLLoader
+    private ComboBox<Genre> cmbGenere; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtMemoria"
     private TextField txtMemoria; // Value injected by FXMLLoader
@@ -73,8 +75,10 @@ public class FXMLController {
 
     }
     
+    // qua riempio le tendine
     public void setModel(Model model) {
     	this.model = model;
+    	this.cmbGenere.getItems().addAll(model.getGeneri());
     }
 
 }
