@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
 import it.polito.tdp.itunes.model.Album;
 import it.polito.tdp.itunes.model.Artist;
 import it.polito.tdp.itunes.model.Genre;
@@ -76,9 +78,9 @@ public class ItunesDAO {
 		return result;
 	}
 	
-	public List<Track> getAllTracks(){
+	public void getAllTracks(Map<Integer,Track> idMap){
 		final String sql = "SELECT * FROM Track";
-		List<Track> result = new ArrayList<Track>();
+		
 		
 		try {
 			Connection conn = DBConnect.getConnection();
@@ -86,17 +88,21 @@ public class ItunesDAO {
 			ResultSet res = st.executeQuery();
 
 			while (res.next()) {
-				result.add(new Track(res.getInt("TrackId"), res.getString("Name"), 
+				if(!idMap.containsKey(res.getInt("TrackId"))) {
+				
+				Track t = new Track(res.getInt("TrackId"), res.getString("Name"), 
 						res.getString("Composer"), res.getInt("Milliseconds"), 
-						res.getInt("Bytes"),res.getDouble("UnitPrice")));
-			
+						res.getInt("Bytes"),res.getDouble("UnitPrice"));
+				
+				idMap.put(t.getTrackId(), t);
+			}
 			}
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException("SQL Error");
 		}
-		return result;
+		
 	}
 	
 	public List<Genre> getAllGenres(){
@@ -140,5 +146,6 @@ public class ItunesDAO {
 	}
 
 	
+	public List<>
 	
 }
