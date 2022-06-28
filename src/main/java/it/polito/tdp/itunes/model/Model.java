@@ -27,7 +27,7 @@ public class Model {
 		//recupero la componenete connessa di c
 		Set<Track> componenteConnessa;
 		ConnectivityInspector<Track, DefaultWeightedEdge> ci = 
-				new ConnectivityInspector<>(this.grafo);
+				new ConnectivityInspector<>(this.grafo); 
 		componenteConnessa = ci.connectedSetOf(c);
 		
 		List<Track> canzoniValide = new ArrayList<Track>();
@@ -97,6 +97,8 @@ public class Model {
 		
 	}*/
 	
+	
+	// faccio la somma delle memorie   
 	private int sommaMemoria (List<Track> canzoni) {
 		int somma = 0;
 		for(Track t : canzoni) {
@@ -161,7 +163,7 @@ public class Model {
 		for(DefaultWeightedEdge e : this.grafo.edgeSet()) {
 			int peso = (int) this.grafo.getEdgeWeight(e);
 			if(peso > max) {
-				result.clear();
+				result.clear(); //pulisco result, levo tutti quei valori
 				result.add(new Adiacenza(this.grafo.getEdgeSource(e),
 						this.grafo.getEdgeTarget(e), peso));
 				max = peso;
