@@ -7,6 +7,7 @@ package it.polito.tdp.itunes;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.itunes.model.Adiacenza;
 import it.polito.tdp.itunes.model.Genre;
 import it.polito.tdp.itunes.model.Model;
 import javafx.event.ActionEvent;
@@ -54,12 +55,28 @@ public class FXMLController {
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
+    	
+    	Genre genere = cmbGenere.getValue();
+    	txtResult.clear();
+    	
+    	this.model.creaGrafo(genere);
+    	
+		   txtResult.appendText("grafo creato: "+"\n");
+		   txtResult.appendText("# VERTICI: "+this.model.nVertici()+"\n");
+		   txtResult.appendText("# ARCHI: "+this.model.nArchi()+"\n");
 
     }
 
     @FXML
     void doDeltaMassimo(ActionEvent event) {
     	
+    	
+    	
+    	
+    	for( Adiacenza a : this.model.migliore()) {
+    		txtResult.appendText(a.toString() + "\n");
+    	}
+
     	
     }
 
